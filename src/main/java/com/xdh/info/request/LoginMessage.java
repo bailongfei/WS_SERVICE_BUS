@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 /**
  * @Package: com.xdh.info.request
  * @ClassName: LoginMessage
- * @Description: TODO
+ * @Description: 登录消息的入参
  * @Author: LaoShiRen
  * @CreateDate: 2019-07-13 17:37
  * @Version: 1.0

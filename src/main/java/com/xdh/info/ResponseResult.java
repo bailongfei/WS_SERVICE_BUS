@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.*;
 /**
  * @Package: com.xdh.info
  * @ClassName: Result
- * @Description: TODO
+ * @Description: 返回消息 泛型
  * @Author: LaoShiRen
  * @CreateDate: 2019-07-13 17:26
  * @Version: 1.0

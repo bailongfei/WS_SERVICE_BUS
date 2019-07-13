@@ -3,7 +3,7 @@ package com.xdh.info;
 /**
  * @Package: com.xdh.info
  * @ClassName: RequestMessage
- * @Description: TODO
+ * @Description: 入参消息的共同父类 必须继承
  * @Author: LaoShiRen
  * @CreateDate: 2019-07-13 17:26
  * @Version: 1.0

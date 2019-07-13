@@ -8,7 +8,7 @@ import com.xdh.utils.strings.ResourcesUtil;
 /**
  * @Package: com.xdh.dao
  * @ClassName: LoginDao
- * @Description: 登录
+ * @Description: 登录方法
  * @Author: LaoShiRen
  * @CreateDate: 2019-07-13 17:33
  * @Version: 1.0
