@@ -10,7 +10,7 @@
                 │           ├── dao     各个接口数据库处理
                 │           ├── info    入参和结果包装类
                 │           │   ├── request 入参的实体类
-                │           │   └── response 入参的实体类
+                │           │   └── response 出参的实体类
                 │           ├── quartz  定时任务
                 │           ├── utils   工具类
                 │           │   ├── commons 数据库连接池
