@@ -4,15 +4,13 @@ import javax.xml.bind.annotation.*;
 
 /**
  * 返回结果的统一封装类。
- * 
- * @author ly 2019-04-28
- * @version 1.0
  *
  * @param <T> 返回结果集合中的元素类型，若无具体类型或者多类型，可以指定为Object。
  */
 @XmlRootElement(name = "result")
 @XmlSeeAlso({
-			})
+
+})
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(propOrder = { "resultCode", "resultInfo", "data" })
 public class Result<T> {

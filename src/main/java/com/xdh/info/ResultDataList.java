@@ -8,32 +8,31 @@ import java.util.List;
 
 /**
  * 返回结果的包装类。内部包装了一个List。
- * 
- * @author ly 2019-01-23
  *
  * @param <T> 集合中的元素类型。
  */
 @XmlRootElement(name = "data")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ResultDataList<T> {
-	@XmlAnyElement(lax = true)
-	private List<T> data;
+    @XmlAnyElement(lax = true)
+    private List<T> data;
 
-	public List<T> getData() {
-		return data;
-	}
+    public List<T> getData() {
+        return data;
+    }
 
-	public void setData(List<T> data) {
-		this.data = data;
-	}
+    public void setData(List<T> data) {
+        this.data = data;
+    }
 
-	public ResultDataList() {
-		super();
-	}
+    public ResultDataList() {
+        super();
+    }
 
-	public ResultDataList(List<T> data) {
-		super();
-		this.data = data;
-	}
+    public ResultDataList(List<T> data) {
+        super();
+        this.data = data;
+    }
+
 
 }
