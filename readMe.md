@@ -1,3 +1,10 @@
+##2019年07月14日13:03:29
+    1.更新数据库连接池，使用静态内部类保持数据库连接池的单例性默认加载
+    resources/config/database/jdbc 的属性详情见PoolConfig.java,
+    ConnectionPool.InnerClass.java。
+ 
+ 
+
 #项目结构
 
         ├── pom.xml  
@@ -29,5 +36,5 @@
                     └── WEB-INF
                         └── web.xml 
 
-#项目说明
-。。。不知道说啥
+
+

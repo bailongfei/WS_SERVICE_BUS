@@ -3,6 +3,7 @@ package com.xdh;
 import com.xdh.info.RequestMessage;
 import com.xdh.info.ResponseResult;
 import com.xdh.info.request.LoginMessage;
+import com.xdh.utils.strings.IPUtil;
 import com.xdh.utils.strings.ResourcesUtil;
 
 /**
@@ -20,13 +21,13 @@ public class ServiceRESTFulImpl implements ServiceRESTFul {
      *
      * @param reqName  要调用的服务名。
      * @param params 请求参数
-     * @return
+     * @return res
      */
     @SuppressWarnings("unchecked")
     private <R extends ResponseResult<?>, T extends RequestMessage> R invokeExecutableService(String reqName, T params) {
         R res = null;
         if (reqName == null || params == null) {
-            return res;
+            return null;
         }
         try {
             Class<?> c = Class.forName(ResourcesUtil.getResourceBundleMessage(reqName));
@@ -34,7 +35,6 @@ public class ServiceRESTFulImpl implements ServiceRESTFul {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return res;
     }
 
@@ -48,7 +48,7 @@ public class ServiceRESTFulImpl implements ServiceRESTFul {
      * @return res
      */
     private <R, T extends RequestMessage> ResponseResult<R> executeService(String reqName, T inMessage) {
-        inMessage.setClientIP("");
+        inMessage.setClientIP(IPUtil.getClientIP());
         inMessage.setServiceName(reqName);
         return invokeExecutableService(reqName,inMessage);
     }

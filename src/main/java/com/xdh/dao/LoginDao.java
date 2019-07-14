@@ -28,6 +28,9 @@ public class LoginDao implements Executable<ResponseResult, LoginMessage> {
                     new Object());
         }
         try {
+
+
+
 //            dao 层持久
             return new ResponseResult<>("1",
                     ResourcesUtil.getResourceBundleMessage(messagePath, "Service.Succeed"),

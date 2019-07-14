@@ -31,14 +31,32 @@ public class ConnectionPool {
     /**
      * 初始化连接池配置
      */
-    public ConnectionPool(PoolConfig config) {
+    private ConnectionPool(PoolConfig config) {
         this.config = config;
+        init();
     }
+
+    private static class InnerClass{
+        private static ConnectionPool pool = new ConnectionPool(new PoolConfig("config/database/jdbc"));
+    }
+
+
+    private static ConnectionPool getInstance(){
+        if (InnerClass.pool.isActive){
+            return InnerClass.pool;
+        } else {
+            InnerClass.pool = new ConnectionPool(new PoolConfig("config/database/jdbc"));
+            return InnerClass.pool;
+        }
+
+    }
+
+
 
     /**
      * 数据库连接池初始化
      */
-    public void init() {
+    private void init() {
         for (int i = 0; i < config.getInitConn(); i++) {//建立初始连接
             //获取连接对象
             Connection conn;

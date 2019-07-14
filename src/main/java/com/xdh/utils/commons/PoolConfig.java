@@ -40,8 +40,6 @@ public class PoolConfig {
     private long checkPeriod = 1000 * 30;//自检周期
 
 
-
-
     public String getDriverName() {
         return driverName;
     }
