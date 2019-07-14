@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class QuartzJob  {
 
-    @Scheduled(cron = "0/1 * * * * ? ")
+    @Scheduled(cron = "0 0/1 * * * ? ")
     public void execute() {
         System.out.println("定时任务:"+DateFormatUtil.getDate());
     }

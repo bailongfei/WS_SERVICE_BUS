@@ -1,8 +1,9 @@
 package com.xdh;
 
 import com.xdh.info.RequestMessage;
-import com.xdh.info.ResponseResult;
+import com.xdh.info.Result;
 import com.xdh.info.request.LoginMessage;
+import com.xdh.utils.strings.DateFormatUtil;
 import com.xdh.utils.strings.IPUtil;
 import com.xdh.utils.strings.ResourcesUtil;
 
@@ -19,12 +20,12 @@ public class ServiceRESTFulImpl implements ServiceRESTFul {
     /**
      * 执行实现了Executable<R,T>接口的服务类。
      *
-     * @param reqName  要调用的服务名。
-     * @param params 请求参数
+     * @param reqName 要调用的服务名。
+     * @param params  请求参数
      * @return res
      */
     @SuppressWarnings("unchecked")
-    private <R extends ResponseResult<?>, T extends RequestMessage> R invokeExecutableService(String reqName, T params) {
+    private <R extends Result<?>, T extends RequestMessage> R invokeExecutableService(String reqName, T params) {
         R res = null;
         if (reqName == null || params == null) {
             return null;
@@ -41,21 +42,25 @@ public class ServiceRESTFulImpl implements ServiceRESTFul {
 
     /**
      * 统一执行接口
-     * @param reqName  请求名
+     *
+     * @param reqName   请求名
      * @param inMessage 入参
-     * @param <R> 泛型
-     * @param <T> 泛型
+     * @param <R>       泛型
+     * @param <T>       泛型
      * @return res
      */
-    private <R, T extends RequestMessage> ResponseResult<R> executeService(String reqName, T inMessage) {
+    private <R, T extends RequestMessage> Result<R> executeService(String reqName, T inMessage) {
         inMessage.setClientIP(IPUtil.getClientIP());
         inMessage.setServiceName(reqName);
-        return invokeExecutableService(reqName,inMessage);
+        System.out.println(DateFormatUtil.getDate()+reqName);
+        return invokeExecutableService(reqName, inMessage);
     }
 
 
     @Override
-    public ResponseResult<Object> login(LoginMessage message) {
-        return executeService("com.xdh.info.request.loginMessage",message);
+    public Result<Object> login(LoginMessage message) {
+        System.out.println(message.getPassword());
+        System.out.println(message.getLoginName());
+        return executeService("com.xdh.info.request.LoginMessage", message);
     }
 }

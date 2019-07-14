@@ -40,8 +40,7 @@ public class ConnectionPool {
         private static ConnectionPool pool = new ConnectionPool(new PoolConfig("config/database/jdbc"));
     }
 
-
-    private static ConnectionPool getInstance(){
+    public static ConnectionPool getInstance(){
         if (InnerClass.pool.isActive){
             return InnerClass.pool;
         } else {
@@ -76,6 +75,11 @@ public class ConnectionPool {
      * 获取新数据库连接
      */
     private synchronized Connection getNewConnection() throws SQLException {
+        try {
+            Class.forName(config.getDriverName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
         Connection conn = null;
         DriverManager.setLoginTimeout(5);
         conn = DriverManager.getConnection(config.getUrl(),

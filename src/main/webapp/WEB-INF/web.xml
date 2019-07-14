@@ -15,31 +15,15 @@
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
     </listener>
 
-    <!--    quartz start-->
-<!--    <servlet>-->
-<!--        <servlet-name>QuartzInitializer</servlet-name>-->
-<!--        <servlet-class>org.quartz.ee.servlet.QuartzInitializerServlet</servlet-class>-->
-<!--        <init-param>-->
-<!--            <param-name>config-file</param-name>-->
-<!--            <param-value>/config/quartz/quartz.properties</param-value>-->
-<!--        </init-param>-->
-<!--        <init-param>-->
-<!--            <param-name>shutdown-on-unload</param-name>-->
-<!--            <param-value>true</param-value>-->
-<!--        </init-param>-->
-<!--        <load-on-startup>2</load-on-startup>-->
-<!--    </servlet>-->
-    <!--    quartz end-->
-
     <!--  cxf servlet start-->
     <servlet>
-        <servlet-name>CXFServlet</servlet-name>
+        <servlet-name>CxFServlet</servlet-name>
         <servlet-class>org.apache.cxf.transport.servlet.CXFServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>CXFServlet</servlet-name>
+        <servlet-name>CxFServlet</servlet-name>
         <url-pattern>/*</url-pattern>
     </servlet-mapping>
     <!--  cxf servlet end-->

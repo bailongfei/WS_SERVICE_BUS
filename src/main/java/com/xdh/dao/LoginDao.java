@@ -1,9 +1,14 @@
 package com.xdh.dao;
 
-import com.xdh.info.ResponseResult;
 import com.xdh.Executable;
+import com.xdh.info.Result;
 import com.xdh.info.request.LoginMessage;
+import com.xdh.utils.commons.ConnectionPool;
 import com.xdh.utils.strings.ResourcesUtil;
+
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.JDBCType;
 
 /**
  * @Package: com.xdh.dao
@@ -13,32 +18,45 @@ import com.xdh.utils.strings.ResourcesUtil;
  * @CreateDate: 2019-07-13 17:33
  * @Version: 1.0
  */
-public class LoginDao implements Executable<ResponseResult, LoginMessage> {
+public class LoginDao implements Executable<Result, LoginMessage> {
 
     @Override
-    public ResponseResult execute(LoginMessage params) {
+    public Result execute(LoginMessage params) {
         if (params.getLoginName() == null) {
-            return new ResponseResult<>("0",
+            return new Result<>("0",
                     ResourcesUtil.getResourceBundleMessage(messagePath, "Missing.LoginMessage.LoginName"),
-                    new Object());
+                    null);
         }
         if (params.getPassword() == null) {
-            return new ResponseResult<>("0",
+            return new Result<>("0",
                     ResourcesUtil.getResourceBundleMessage(messagePath, "Missing.LoginMessage.Password"),
-                    new Object());
+                   null);
         }
+        ConnectionPool pool = ConnectionPool.getInstance();
+        Connection conn = null;
         try {
 
-
+            conn = pool.getConnection();
+            String sql = "call sp_login(?,?,?,?) ";
+            CallableStatement stmt = conn.prepareCall(sql);
+            stmt.setString(1,params.getLoginName());
+            stmt.setString(2,params.getPassword());
+            stmt.registerOutParameter(3, JDBCType.CHAR);
+            stmt.registerOutParameter(4, JDBCType.CHAR);
+            stmt.execute();
+            conn.commit();
 
 //            dao 层持久
-            return new ResponseResult<>("1",
-                    ResourcesUtil.getResourceBundleMessage(messagePath, "Service.Succeed"),
-                    new Object());
+            return new Result<>(stmt.getString(3),
+                    stmt.getString(4),
+                    null);
         } catch (Exception e) {
-            return new ResponseResult<>("0",
+            e.printStackTrace();
+            return new Result<>("0",
                     ResourcesUtil.getResourceBundleMessage(messagePath, "Service.Failed"),
-                    new Object());
+                    null);
+        } finally {
+            pool.freeConn(conn);
         }
     }
 
